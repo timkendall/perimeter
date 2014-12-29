@@ -1,0 +1,113 @@
+{
+  "data": {
+    "camera": [
+      {
+        "path": "default",
+        "recording": false,
+        "status": "inactive",
+        "nickname": "My Baller Camera",
+        "motionDetection": true,
+        "facialDetection": false,
+        "facialRecognition": false,
+        "createdAt": "2014-12-29T19:52:19.657Z",
+        "updatedAt": "2014-12-29T19:52:19.657Z",
+        "id": 1
+      }
+    ],
+    "recording": []
+  },
+  "schema": {
+    "camera": {
+      "path": {
+        "type": "string",
+        "unique": true
+      },
+      "recording": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "status": {
+        "type": "string",
+        "defaultsTo": "inactive"
+      },
+      "nickname": {
+        "type": "string",
+        "defaultsTo": "My Baller Camera"
+      },
+      "fps": {
+        "type": "integer"
+      },
+      "resolution": {
+        "type": "string"
+      },
+      "motionDetection": {
+        "type": "boolean",
+        "defaultsTo": true
+      },
+      "facialDetection": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "facialRecognition": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "recording": {
+      "file": {
+        "type": "string"
+      },
+      "start": {
+        "type": "datetime"
+      },
+      "end": {
+        "type": "datetime"
+      },
+      "duration": {
+        "type": "integer"
+      },
+      "resolution": {
+        "type": "string"
+      },
+      "fps": {
+        "type": "integer"
+      },
+      "camera": {
+        "type": "integer",
+        "model": "camera",
+        "foreignKey": true,
+        "alias": "camera"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "camera": {
+      "id": 1
+    },
+    "recording": {}
+  }
+}
