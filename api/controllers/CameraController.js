@@ -6,6 +6,11 @@
  */
 
 module.exports = {
-	
+	/*
+   * GET /cameras/hi
+   */
+   hi: function (req, res) {
+     return res.send("Hi there!");
+   }
 };
 

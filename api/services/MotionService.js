@@ -12,10 +12,11 @@ var cv = require('opencv'),
   Stream = require('stream').Stream,
   util = require('util');
 
-var Motion = function (src, threshold) {
+var MotionWatcher = function (camera, threshold) {
+  var self = this;
     try {
-      this.camera = new cv.VideoCapture(src);
-      this.detected = [];
+      this.camera = camera;
+      this.stream = new cv.VideoCapture(0); // Need to translate paths
       this.threshold = threshold || 5;
       this.watching = false;
     } catch (e) {
@@ -26,16 +27,18 @@ var Motion = function (src, threshold) {
       return rect[0] + rect[1] + rect[2] + rect[3];
     }
 }
-util.inherits(Motion, Stream);
+util.inherits(MotionWatcher, Stream);
 
-Motion.prototype.start = function() {
+MotionWatcher.prototype.start = function() {
     var self = this;
 
+    self.watching = true;
     try {
+
       /*
        * Open video stream
        */
-      self.camera.read(function (err, image) {
+      self.stream.read(function (err, image) {
         if (err) throw err;
 
         /*
@@ -49,7 +52,7 @@ Motion.prototype.start = function() {
          */
          var prevRec = null;
          var iter = function () {
-           self.camera.read(function (err, m2) {
+           self.stream.read(function (err, m2) {
               var rec = track.track(m2)
               /*
                * Calculate changes in frames
@@ -57,13 +60,21 @@ Motion.prototype.start = function() {
               if (prevRec) {
                 var diff = self.collapseRect(rec) - self.collapseRect(prevRec)
                 if (diff > self.threshold) {
-                  var motion = { time: Date.now(), difference: diff };
-                  self.detected.push(motion);
-                  self.emit('motion', motion);
+                  /*
+                   * Create motion record
+                   */
+                   Motion.create({
+                    time: new Date(),
+                    difference: diff,
+                    camera: self.camera.id
+                   }).exec(function (err, record) {
+
+                   });
+
                 }
               }
               prevRec = rec;
-              iter();
+              if (self.watching) iter();
             });
           }
 
@@ -82,7 +93,14 @@ Motion.prototype.start = function() {
 
 
 module.exports = {
-  watch: function (src) {
-    return new Motion(src);
+  watch: function (camera) {
+    var motionWatcher = new MotionWatcher(camera);
+    motionWatcher.start();
+    return motionWatcher;
+  },
+
+  unwatch: function (motionWatcher) {
+    motionWatcher.watching = false;
+    motionWatcher.stream.close();
   }
 };

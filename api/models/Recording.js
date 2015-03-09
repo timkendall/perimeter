@@ -16,34 +16,24 @@ module.exports = {
       required: true
     },
     /*
-     * Date and time when this recording starts
+     * Video metadata
      */
-    start: {
-      type: 'datetime',
-      required: true
+    meta: {
+      type: 'json'
+    },
+     /*
+     * Path to the thumbnail file
+     */
+    thumbnail: {
+      type: 'string'
     },
     /*
-     * Date and time when this recording ends
+     * Array of motions detected during this recording
      */
-    end: {
-      type: 'datetime',
-      required: true
+    motions: {
+      collection: 'motion',
+      via: 'recording'
     },
-    /*
-     * Length of this recording in seconds
-     */
-    duration: {
-      type: 'integer',
-      required: true
-    },
-    /*
-     * The resolution of the video
-     */
-    resolution: 'string',
-    /*
-     * The FPS of the video
-     */
-    fps: 'integer',
     /*
      * The camera where this recording came from
      */
