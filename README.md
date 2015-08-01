@@ -1,7 +1,7 @@
-vigil
+Perimeter
 =====
 
-A Node.js based video surveillance system. Supports multiple cameras (IP, HDMI, USB) as well as motion detection, facial recognition, and more.
+A modern (Node.js) video surveillance system. Supports multiple cameras (IP, HDMI, USB) as well as motion detection, facial recognition, and more.
 
 ## Goals
 The goal is for this to be an alternative and more powerful surveillance system for people with existing setups and who are tired of their clunky DVR systems. Here are the features I hope to support - 
@@ -13,3 +13,12 @@ The goal is for this to be an alternative and more powerful surveillance system 
 * Push notifications for events
 * Facial recognition (i.e "Bob just got home")
 * License plate recognition
+
+
+## Installing
+
+TODO
+
+## Contributing
+
+TODO
