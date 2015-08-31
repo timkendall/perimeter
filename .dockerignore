@@ -1,0 +1,5 @@
+.git
+.elasticbeanstalk/
+.gitignore
+.DS_Store
+node_modules/

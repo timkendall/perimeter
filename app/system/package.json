@@ -1,0 +1,20 @@
+{
+  "name": "system",
+  "version": "1.0.0",
+  "description": "Simple subsystem-based, real-time, architecture for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./"
+  },
+  "keywords": [
+    "subsystem",
+    "realtime",
+    "real-time"
+  ],
+  "author": "Timothy Kendall <kenda104@mail.chapman.edu> (http://timkendall.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "bunyan": "^1.4.0",
+    "rethinkdb": "^2.1.0"
+  }
+}
